@@ -1,15 +1,17 @@
 package main
 
 import (
+	"encoding/gob"
 	"fmt"
 	"log"
 	"net/http"
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/mznrasil/bookings/pkg/config"
-	"github.com/mznrasil/bookings/pkg/handlers"
-	"github.com/mznrasil/bookings/pkg/render"
+	"github.com/mznrasil/bookings/internal/config"
+	"github.com/mznrasil/bookings/internal/handlers"
+	"github.com/mznrasil/bookings/internal/models"
+	"github.com/mznrasil/bookings/internal/render"
 )
 
 const PORT = ":8080"
@@ -18,6 +20,25 @@ var appConfig config.AppConfig
 var session *scs.SessionManager
 
 func main() {
+	err := run()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	server := http.Server{
+		Addr:    PORT,
+		Handler: routes(&appConfig),
+	}
+
+	fmt.Println("Listening on port:", PORT)
+	err = server.ListenAndServe()
+	log.Fatal(err)
+}
+
+func run() error {
+	// what am I going to put in the session
+	gob.Register(models.Reservation{})
+
 	// change this to true when in production
 	appConfig.InProduction = false
 
@@ -32,6 +53,7 @@ func main() {
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
 		log.Fatal("Error creating template cache: ", err)
+		return err
 	}
 	appConfig.TemplateCache = tc
 	appConfig.UseCache = false
@@ -40,13 +62,5 @@ func main() {
 
 	repo := handlers.NewRepository(&appConfig)
 	handlers.NewHandlers(repo)
-
-	server := http.Server{
-		Addr:    PORT,
-		Handler: routes(&appConfig),
-	}
-
-	fmt.Println("Listening on port:", PORT)
-	err = server.ListenAndServe()
-	log.Fatal(err)
+	return nil
 }

@@ -1,0 +1,18 @@
+mode: set
+github.com/mznrasil/bookings/internal/forms/errors.go:5.44,7.2 1 1
+github.com/mznrasil/bookings/internal/forms/errors.go:9.42,11.17 2 0
+github.com/mznrasil/bookings/internal/forms/errors.go:11.17,13.3 1 0
+github.com/mznrasil/bookings/internal/forms/errors.go:14.2,14.11 1 0
+github.com/mznrasil/bookings/internal/forms/forms.go:16.33,21.2 1 1
+github.com/mznrasil/bookings/internal/forms/forms.go:23.43,24.31 1 1
+github.com/mznrasil/bookings/internal/forms/forms.go:24.31,26.37 2 1
+github.com/mznrasil/bookings/internal/forms/forms.go:26.37,28.4 1 1
+github.com/mznrasil/bookings/internal/forms/forms.go:32.39,34.15 2 1
+github.com/mznrasil/bookings/internal/forms/forms.go:34.15,36.3 1 1
+github.com/mznrasil/bookings/internal/forms/forms.go:37.2,37.13 1 1
+github.com/mznrasil/bookings/internal/forms/forms.go:40.57,42.25 2 1
+github.com/mznrasil/bookings/internal/forms/forms.go:42.25,45.3 2 1
+github.com/mznrasil/bookings/internal/forms/forms.go:46.2,46.13 1 1
+github.com/mznrasil/bookings/internal/forms/forms.go:49.29,51.2 1 1
+github.com/mznrasil/bookings/internal/forms/forms.go:53.38,54.40 1 1
+github.com/mznrasil/bookings/internal/forms/forms.go:54.40,56.3 1 1

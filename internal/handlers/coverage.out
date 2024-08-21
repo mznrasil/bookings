@@ -1,0 +1,22 @@
+mode: set
+github.com/mznrasil/bookings/internal/handlers/handlers.go:21.53,25.2 1 1
+github.com/mznrasil/bookings/internal/handlers/handlers.go:27.33,29.2 1 1
+github.com/mznrasil/bookings/internal/handlers/handlers.go:31.67,33.2 1 1
+github.com/mznrasil/bookings/internal/handlers/handlers.go:35.68,47.2 5 1
+github.com/mznrasil/bookings/internal/handlers/handlers.go:49.71,51.2 1 1
+github.com/mznrasil/bookings/internal/handlers/handlers.go:53.69,55.2 1 1
+github.com/mznrasil/bookings/internal/handlers/handlers.go:57.78,65.2 4 1
+github.com/mznrasil/bookings/internal/handlers/handlers.go:67.82,69.16 2 1
+github.com/mznrasil/bookings/internal/handlers/handlers.go:69.16,72.3 2 0
+github.com/mznrasil/bookings/internal/handlers/handlers.go:74.2,88.19 6 1
+github.com/mznrasil/bookings/internal/handlers/handlers.go:88.19,96.3 4 0
+github.com/mznrasil/bookings/internal/handlers/handlers.go:98.2,99.66 2 1
+github.com/mznrasil/bookings/internal/handlers/handlers.go:102.81,104.9 2 1
+github.com/mznrasil/bookings/internal/handlers/handlers.go:104.9,109.3 4 1
+github.com/mznrasil/bookings/internal/handlers/handlers.go:111.2,118.4 4 0
+github.com/mznrasil/bookings/internal/handlers/handlers.go:121.81,123.2 1 1
+github.com/mznrasil/bookings/internal/handlers/handlers.go:125.85,129.2 3 1
+github.com/mznrasil/bookings/internal/handlers/handlers.go:136.85,142.16 3 1
+github.com/mznrasil/bookings/internal/handlers/handlers.go:142.16,144.3 1 0
+github.com/mznrasil/bookings/internal/handlers/handlers.go:145.2,146.14 2 1
+github.com/mznrasil/bookings/internal/handlers/handlers.go:149.70,151.2 1 1
