@@ -5,11 +5,13 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/alexedwards/scs/v2"
 	"github.com/mznrasil/bookings/internal/config"
 	"github.com/mznrasil/bookings/internal/handlers"
+	"github.com/mznrasil/bookings/internal/helpers"
 	"github.com/mznrasil/bookings/internal/models"
 	"github.com/mznrasil/bookings/internal/render"
 )
@@ -42,6 +44,12 @@ func run() error {
 	// change this to true when in production
 	appConfig.InProduction = false
 
+	infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
+	appConfig.InfoLog = infoLog
+
+	errorLog := log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
+	appConfig.ErrorLog = errorLog
+
 	session = scs.New()
 	session.Lifetime = 24 * time.Hour
 	session.Cookie.Persist = true
@@ -61,6 +69,7 @@ func run() error {
 	render.NewTemplates(&appConfig)
 
 	repo := handlers.NewRepository(&appConfig)
+	helpers.NewHelpers(&appConfig)
 	handlers.NewHandlers(repo)
 	return nil
 }
