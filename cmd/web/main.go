@@ -9,7 +9,9 @@ import (
 	"time"
 
 	"github.com/alexedwards/scs/v2"
+
 	"github.com/mznrasil/bookings/internal/config"
+	"github.com/mznrasil/bookings/internal/driver"
 	"github.com/mznrasil/bookings/internal/handlers"
 	"github.com/mznrasil/bookings/internal/helpers"
 	"github.com/mznrasil/bookings/internal/models"
@@ -18,14 +20,17 @@ import (
 
 const PORT = ":8080"
 
-var appConfig config.AppConfig
-var session *scs.SessionManager
+var (
+	appConfig config.AppConfig
+	session   *scs.SessionManager
+)
 
 func main() {
-	err := run()
+	db, err := run()
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer db.SQL.Close()
 
 	server := http.Server{
 		Addr:    PORT,
@@ -37,9 +42,12 @@ func main() {
 	log.Fatal(err)
 }
 
-func run() error {
+func run() (*driver.DB, error) {
 	// what am I going to put in the session
 	gob.Register(models.Reservation{})
+	gob.Register(models.Room{})
+	gob.Register(models.Restriction{})
+	gob.Register(models.Restriction{})
 
 	// change this to true when in production
 	appConfig.InProduction = false
@@ -58,18 +66,26 @@ func run() error {
 
 	appConfig.Session = session
 
+	// Connect to a database
+	log.Println("Connecting to database...")
+	db, err := driver.ConnectSQL("host=localhost port=5432 dbname=bookings user=rasil password=")
+	if err != nil {
+		log.Fatal("Cannot connect to database! Dying...")
+	}
+	fmt.Println("Connected to database")
+
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
 		log.Fatal("Error creating template cache: ", err)
-		return err
+		return nil, err
 	}
 	appConfig.TemplateCache = tc
 	appConfig.UseCache = false
 
-	render.NewTemplates(&appConfig)
+	render.NewRenderer(&appConfig)
 
-	repo := handlers.NewRepository(&appConfig)
+	repo := handlers.NewRepository(&appConfig, db)
 	helpers.NewHelpers(&appConfig)
 	handlers.NewHandlers(repo)
-	return nil
+	return db, nil
 }
